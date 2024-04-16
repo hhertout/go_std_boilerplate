@@ -1,10 +1,23 @@
-# Project std_go_boilerplate
-
-One Paragraph of project description goes here
+# Go API Boilerplate - Std lib
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Docker
+
+### Build the image
+```bash
+docker build -t go-api-boilerplate .
+```
+
+### Run the container
+```bash
+docker run -p 8080:8080 go-api-boilerplate
+```
+
+### Run the container with environment variables
+```bash
+docker run -p 8080:8080 -e PORT=8080 go-api-boilerplate
+```
 
 ## MakeFile
 
