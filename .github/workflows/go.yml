@@ -1,0 +1,40 @@
+name: app
+
+on:
+  pull_request:
+    branches: ["main", "dev"]
+  push:
+    branches: ["main"]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.22.2
+      - name: Tests
+        run: go test ./tests/... -v
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.22.2
+      - name: Build
+        run: go build -o main cmd/api/main.go
+
+  docker_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: docker build .
