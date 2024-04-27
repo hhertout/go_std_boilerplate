@@ -9,7 +9,7 @@ type BaseController struct {
 	ctx *Context
 }
 
-type Context struct {}
+type Context struct{}
 type DefaultMessage struct {
 	Message string `json:"message"`
 }
@@ -29,8 +29,12 @@ func (c *BaseController) JsonReponse(w http.ResponseWriter, status int, data int
 }
 
 func (c *BaseController) BindJsonBody(r *http.Request, body interface{}) error {
+	if r.Body == nil {
+		return nil
+	}
+
 	decoder := json.NewDecoder(r.Body)
-	err:= decoder.Decode(body)
+	err := decoder.Decode(body)
 	if err != nil {
 		return err
 	}
