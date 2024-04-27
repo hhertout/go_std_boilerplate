@@ -13,7 +13,7 @@ func ChainMiddleware(handler http.Handler, middlewares ...func(next http.Handler
 	}
 
 	var next http.Handler
-	for i := len(middlewares) - 1; i >= 0; i-- {
+	for i := 0; i < len(middlewares); i++ {
 		next = middlewares[i](handler)
 	}
 

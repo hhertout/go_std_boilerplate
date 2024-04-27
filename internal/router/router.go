@@ -3,6 +3,7 @@ package router
 import (
 	"net/http"
 	"std_go_boilerplate/internal/controller"
+	"std_go_boilerplate/internal/middleware"
 )
 
 func ServeRoutes() http.Handler {
@@ -13,7 +14,7 @@ func ServeRoutes() http.Handler {
 
 	Group(router, "/api/v1", func(v1 *http.ServeMux) {
 		// other routes here
-	}) // can set middleware here
+	}, middleware.ApiKeyMiddleware) // can set middleware here
 
 	return router
 }

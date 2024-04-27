@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestHandler(t *testing.T) {
+func TestIsAlive(t *testing.T) {
 	c := controller.NewBaseController()
 	server := httptest.NewServer(http.HandlerFunc(c.HealthCheck))
 	defer server.Close()
