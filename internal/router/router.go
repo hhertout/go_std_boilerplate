@@ -4,9 +4,10 @@ import (
 	"net/http"
 	"std_go_boilerplate/internal/controller"
 	"std_go_boilerplate/internal/middleware"
+	"std_go_boilerplate/internal/server"
 )
 
-func ServeRoutes() http.Handler {
+func ServeRoutes(ctx server.Context) http.Handler {
 	router := http.NewServeMux()
 	c := controller.NewBaseController()
 

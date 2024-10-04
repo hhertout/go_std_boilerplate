@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"os"
 	"std_go_boilerplate/internal/middleware"
-	"std_go_boilerplate/internal/router"
 	"strconv"
 	"time"
 
@@ -16,7 +15,7 @@ type Server struct {
 	port int
 }
 
-func NewServer() *http.Server {
+func NewServer(r http.Handler, ctx Context) *http.Server {
 	port, _ := strconv.Atoi(os.Getenv("PORT"))
 	NewServer := &Server{
 		port: port,
@@ -25,7 +24,7 @@ func NewServer() *http.Server {
 	// Declare Server config
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", NewServer.port),
-		Handler:      middleware.Logger(router.ServeRoutes()),
+		Handler:      middleware.Logger(r, ctx.Logger),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
